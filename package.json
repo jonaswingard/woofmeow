@@ -1,0 +1,20 @@
+{
+  "name": "indecision-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Andrew Mead",
+  "license": "MIT",
+  "scripts": {
+    "watch":
+      "babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch",
+    "start": "live-server public"
+  },
+  "dependencies": {
+    "babel-preset-env": "1.5.2",
+    "babel-preset-react": "6.24.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "live-server": "^1.2.0"
+  }
+}
