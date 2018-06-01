@@ -7,7 +7,8 @@
   "scripts": {
     "watch":
       "babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch",
-    "start": "live-server public"
+    "server": "live-server public",
+    "start": "npm run watch | npm run server"
   },
   "dependencies": {
     "babel-preset-env": "1.5.2",
