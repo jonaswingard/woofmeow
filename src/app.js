@@ -1,34 +1,26 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Header from './components/Header';
+import Action from './components/Action';
+
 class MyApp extends React.Component {
-  render() {
-    const title = 'My App';
-    const actions = ['action1', 'action2'];
-    return (
-      <div>
-        <Header title={title} />
-        <Action actions={actions} />
-      </div>
-    );
-  }
-}
+  state = {
+    title: 'My Cool App',
+    actions: ['action1', 'action2', 'action3'],
+    date: ''
+  };
 
-class Header extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>{this.props.title}</h1>
-        <h2>Header</h2>
-      </div>
-    );
-  }
-}
+  getDate = () => {
+    this.setState(() => ({ date: new Date().toISOString() }));
+  };
 
-class Action extends React.Component {
   render() {
     return (
       <div>
-        <button>What should I do?</button>
-        <p>Actions</p>
-        <ul>{this.props.actions.map(action => <li>{action}</li>)}</ul>
+        <Header title={this.state.title} />
+        <Action actions={this.state.actions} />
+        <button onClick={this.getDate}>Get Date</button>
+        <p>{this.state.date}</p>
       </div>
     );
   }
