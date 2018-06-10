@@ -4,8 +4,7 @@ export default class Header extends React.Component {
   render() {
     return (
       <div>
-        <h1>{this.props.title}</h1>
-        <h2>Header</h2>
+        <h1>Matlista</h1>
       </div>
     );
   }
