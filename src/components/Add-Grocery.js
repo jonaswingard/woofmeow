@@ -1,17 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { addGrocery } from '../actions/groceries';
+import GroceryForm from './GroceryForm';
 
 const AddGrocery = props => (
-  <form
-    onSubmit={e => {
-      e.preventDefault();
-      const input = e.target.elements.grocery;
-      props.handleAddGrocery(input.value);
-      input.value = '';
+  <GroceryForm
+    onSubmit={(grocery) => {
+      props.dispatch(addGrocery(grocery));
     }}
-  >
-    <input type="text" name="grocery" autoComplete="off" />
-    <button>Add</button>
-  </form>
+  />
 );
 
-export default AddGrocery;
+export default connect()(AddGrocery);

@@ -1,10 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Header from './components/Header';
-import Groceries from './components/Groceries';
-import SelectedGroceries from './components/Selected-Groceries';
+import { Provider } from 'react-redux';
+import { addGrocery } from './actions/groceries';
 import AddGrocery from './components/Add-Grocery';
 import ErrorMessage from './components/Error-Message';
+import GroceryList from './components/GroceryList';
+import Header from './components/Header';
+import SelectedGroceries from './components/Selected-Groceries';
+import getGroceries from './selectors/groceries';
+import configureStore from './store/configureStore';
 
 class MyApp extends React.Component {
   state = {
@@ -68,10 +72,11 @@ class MyApp extends React.Component {
         <SelectedGroceries
           groceries={this.state.groceries.filter(grocery => grocery.checked)}
         />
-        <Groceries
+        <GroceryList />
+        {/* <Groceries
           groceries={this.state.groceries}
           handleToggleGrocery={this.handleToggleGrocery}
-        />
+        /> */}
         <AddGrocery handleAddGrocery={this.handleAddGrocery} />
         <ErrorMessage message={this.state.error} />
       </div>
@@ -79,4 +84,20 @@ class MyApp extends React.Component {
   }
 }
 
-ReactDOM.render(<MyApp />, document.getElementById('app'));
+const store = configureStore();
+
+store.dispatch(addGrocery({ title: 'foo', checked: true }));
+store.dispatch(addGrocery({ title: 'bar', checked: true }));
+store.dispatch(addGrocery({ title: 'baz', checked: true }));
+
+const state = store.getState();
+const visibleGroceries = getGroceries(state.groceries);
+console.log(visibleGroceries);
+
+const jsx = (
+  <Provider store={store}>
+    <MyApp />
+  </Provider>
+);
+
+ReactDOM.render(jsx, document.getElementById('app'));
